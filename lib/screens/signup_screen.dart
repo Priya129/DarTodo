@@ -19,67 +19,64 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width;
-    final double screenHeight = screenSize.height;
+
 
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.of(context).pop(); // This will navigate back to the previous screen
-          },
+
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 23.0),
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                // Handle back button press
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 30.0),
+            child: Text(
+              'Registration',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+
         ),
-        title: const Padding(
-          padding: EdgeInsets.only(top: 30.0),
-          child: Text("Registration", style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-          )),
-        ),
-      ),
+
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.1),
-            Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Container(
-                  width: screenWidth * 0.18,
-                  height: screenWidth * 0.18,
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0, top:25.0),
+              child: Text(
+                "Create a free",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
                   color: Colors.black,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        bottom: -12,
-                        left: -10,
-                        child: Image.asset(
-                          'assets/images/logo.png',
-                          width: screenWidth * 0.15,
-                          height: screenWidth * 0.15,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            const Text(
-              "FocusCraft",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
+            const Padding(
+              padding: EdgeInsets.only(left: 25.0, top:5.0),
+              child: Text(
+                "account",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.05),
+
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Column(
@@ -115,7 +112,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.03),
+                  const SizedBox(height: 10),
                   const Padding(
                     padding: EdgeInsets.only(left: 3.0, bottom: 2.0),
                     child: Text(
@@ -129,7 +126,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   TextField(
                     controller: passwordController,
                    // obscureText: _obscureText,
-                    decoration: InputDecoration(
+                    decoration:  InputDecoration(
                       hintText: 'Enter your password',
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -145,47 +142,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           width: 2.0,
                         ),
                       ),
-                      /*suffixIcon: IconButton(
+                      suffixIcon: IconButton(
                         icon: Icon(
-                       //   _obscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                      //    color: Colors.black54,
+                          _obscurepassword   ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                         color: Colors.black54,
                         ),
                         onPressed: () {
                           setState(() {
-                        //    _obscureText = !_obscureText;
+                           _obscurepassword = !_obscurepassword;
                           });
                         },
-                      ),*/
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0, bottom: 30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const SizedBox(),
-                        InkWell(
-                          onTap: () {
-                            //Navigator.push(
-                            //  context,
-                            /*MaterialPageRoute(
-                              builder: (context) => const ForgetPasswordScreen()),
-                            );*/
-                          },
-                          child: const Text(
-                            "Forget Password?",
-                            style: TextStyle(
-                              fontFamily: 'Poppins',
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                  const Padding(
+                    padding: EdgeInsets.only(left: 3.0, bottom: 2.0),
+                    child: Text(
+                      "Repeat Password",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 20.0),
+                  TextField(
+                    controller: repeatPasswordController,
+                    obscureText: _obscurerepeatpassword,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your password again',
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(
+                          color: Colors.black12,
+                          width: 2.0,
+                        ),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        borderSide: BorderSide(
+                          color: Colors.black54,
+                          width: 2.0,
+                        ),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurerepeatpassword ?
+                          Icons.visibility_off_outlined : Icons.visibility_outlined,
+                           color: Colors.black54,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                           _obscurerepeatpassword = ! _obscurerepeatpassword;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 30.0),
                   ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
@@ -198,7 +213,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     child: const Text(
-                      "Log In",
+                      "Register",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -271,9 +286,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account?"),
+                      Text("Already have an account?"),
                       Text(
-                        "Sign up",
+                        "Sign in",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
