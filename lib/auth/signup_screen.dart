@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../components/button.dart';
 import '../components/custom_text_field.dart';
 import '../global/app_colors.dart';
+import '../routes/routes.dart';
 import 'firebase_auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -57,6 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       var user = await _authService.signUpWithEmailAndPassword(email, password);
       if (user != null) {
         print('Sign up successful: ${user.email}');
+        Routes().navigateToHomeScreen(context);
       } else {
         print('Sign up failed');
       }
@@ -253,7 +255,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const Text("Already have an account?"),
                         InkWell(
                           onTap: () {
-                            Navigator.pop(context);
+                            Routes().navigateToSignInScreen(context);
                           },
                           child: const Text(
                             " Sign in",

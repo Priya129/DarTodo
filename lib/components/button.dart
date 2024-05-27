@@ -4,16 +4,15 @@ class Button extends StatelessWidget {
   final String name;
   final VoidCallback onPressed;
 
-
-  Button({required this.name,
-    required this.onPressed});
+  Button({
+    required this.name,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {onPressed;
-
-      },
+      onPressed: onPressed, // Call the onPressed function
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
         fixedSize: MaterialStateProperty.all<Size>(const Size(500, 50)),

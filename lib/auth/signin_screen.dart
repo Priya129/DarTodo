@@ -47,6 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
       var user = await _authService.signInWithEmailAndPassword(email, password);
       if (user != null) {
         print('Sign in successful: ${user.email}');
+        Routes().navigateToHomeScreen(context);
       } else {
         print('Sign in failed');
       }

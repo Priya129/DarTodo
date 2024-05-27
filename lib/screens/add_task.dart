@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:to_do_app/global/app_colors.dart';
-
 import '../components/button.dart';
 import '../routes/routes.dart';
 
@@ -52,6 +53,51 @@ class _AddTaskState extends State<AddTask> {
     }
   }
 
+  Future<void> _saveTask() async {
+    try {
+      final User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final String userId = user.uid;
+        final taskData = {
+          'title': titleController.text,
+          'date': formattedDate,
+          'time': formattedTime,
+          'category': dropdownValue,
+          'isCompleted': isSwitched,
+          'isFavourite': isFavorite,
+        };
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .collection('tasks')
+            .add(taskData);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Successfully saved the task!'),
+            backgroundColor: Colors.green,
+          ),
+        );
+        Routes().navigateToTaskScreen(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No user is currently signed in.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error saving task: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +128,7 @@ class _AddTaskState extends State<AddTask> {
                 "Title",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 16,
                 ),
               ),
               const SizedBox(height: 5.0),
@@ -117,13 +163,9 @@ class _AddTaskState extends State<AddTask> {
                 ),
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     const Text("Selected date: "),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                     InkWell(
                       onTap: () => _selectDate(context),
                       child: Text(
@@ -135,9 +177,7 @@ class _AddTaskState extends State<AddTask> {
                     ),
                     const SizedBox(width: 20),
                     const Text("Time: "),
-                    SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10),
                     InkWell(
                       onTap: () => _selectTime(context),
                       child: Text(
@@ -256,9 +296,7 @@ class _AddTaskState extends State<AddTask> {
               const SizedBox(height: 380.0),
               Button(
                 name: "Save",
-                onPressed: () {
-                  Routes().navigateToAddTask(context);
-                },
+                onPressed: _saveTask,
               ),
             ],
           ),
