@@ -212,11 +212,14 @@ class _AddTaskState extends State<AddTask> {
                     },
                     items: const [
                       DropdownMenuItem<String>(
-                          value: 'Priority', child: Text('Priority')),
+                          value: 'Priority',
+                          child: Text('Priority')),
                       DropdownMenuItem<String>(
-                          value: 'Personal', child: Text('Personal')),
+                          value: 'Personal',
+                          child: Text('Personal')),
                       DropdownMenuItem<String>(
-                          value: 'Others', child: Text('Others')),
+                          value: 'Others',
+                          child: Text('Others')),
                     ],
                   ),
                 ],

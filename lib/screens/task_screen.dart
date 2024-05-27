@@ -307,7 +307,8 @@ class TaskTile extends StatelessWidget {
       subtitle: Text(task['time']),
       trailing: IconButton(
         icon: Icon(task['isFavourite'] ?
-        Icons.flag_outlined : Icons.flag, color:Colors.orange ,),
+        Icons.flag_outlined : Icons.flag,
+          color:Colors.orange ,),
         onPressed: () {
           FirebaseFirestore.instance.runTransaction((transaction) async {
             DocumentSnapshot freshSnap = await transaction.get(task.reference);
