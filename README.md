@@ -14,7 +14,6 @@ Welcome to the ToDo App! This application, built with Flutter, allows you to eff
 ## Technologies Used
 
 - **Framework:** Flutter
-- **State Management:** Provider or Riverpod (choose one)
 - **Authentication:** Firebase Authentication
 - **Database:** Firestore Cloud Database
 - **Notifications:** Firebase Cloud Messaging
