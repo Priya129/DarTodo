@@ -1,6 +1,6 @@
 
-ToDo App
-Welcome to the ToDo App! This application, built with Flutter, allows you to efficiently manage your tasks with features like categorization, prioritization, search, and notifications. Firebase is used for authentication and Firestore Cloud Database for storing tasks.
+#ToDo App
+#Welcome to the ToDo App! This application, built with Flutter, allows you to efficiently manage your tasks with features like categorization, prioritization, search, and notifications. Firebase is used for authentication and Firestore Cloud Database for storing tasks.
 
 Features
 Add Task: Easily add tasks with details like title, description, due date, and category.
